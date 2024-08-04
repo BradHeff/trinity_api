@@ -5,11 +5,11 @@ const cors = require("cors");
 const data = require("./syncer.json");
 const fs = require("fs");
 const path = require("path");
-const http = require("http");
 
-var oas3Tools = require("oas3-tools");
-var serverPort = 8080;
-var apiPort = 5000;
+const apiPort = 5000;
+const api = "http://api.trincloud.cc";
+const base = "/v1";
+
 // app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
@@ -18,16 +18,29 @@ app.use(cors());
 // The frontend cannot modify or update the data
 // Because we are only using the GET method here.
 
-app.get("/v1/get_syncer", (req, res) => {
+app.get(`${base}/data`, (req, res) => {
   res.json(data);
 });
 
-app.post("/v1/set_syncer", (req, res) => {
-  const datas = [req.body];
+app.get(`${base}/data/:section`, (req, res) => {
+  const section = req.params.section;
+
+  if (data[section]) {
+    res.json(data[section]);
+  } else {
+    res.status(404).json({ error: "Section not found" });
+  }
+});
+
+app.post(`${base}/update`, (req, res) => {
+  const datas = req.body;
   console.log("Received data:", datas);
+
+  jsonData = { ...data, ...datas };
+  console.log("Updated data:", jsonData);
   fs.writeFile(
     path.join(__dirname, "syncer.json"),
-    JSON.stringify(datas, null, 2),
+    JSON.stringify(jsonData, null, 2),
     (err) => {
       if (err) {
         console.error("Error writing to file", err);
@@ -35,16 +48,12 @@ app.post("/v1/set_syncer", (req, res) => {
       }
       res.json({
         message: "Data received successfully",
-        receivedData: datas,
+        receivedData: jsonData,
       });
     }
   );
-  // Send a response back to the client
 });
 
 app.listen(apiPort, () => {
-  console.log(
-    "Server started on port %d (http://api.trincloud.cc)",
-    apiPort
-  );
+  console.log("Server started on port %d (http://api.trincloud.cc)", apiPort);
 });
