@@ -18,8 +18,8 @@
   },
   "LDAP": {
     "server": "HCS-DC01.HORIZON.local",
-    "userou": "dc=horizon,dc=local",
-    "domainname": "(objectClass=inetOrgPerson)",
+    "userou": "OU=Horizon,DC=HORIZON,DC=local",
+    "domainname": "HORIZON",
     "groups": {
       "Executive": [
         "CN=SG_FS_Management,OU=SG_FileShare,OU=Groups,OU=Horizon,DC=HORIZON,DC=local",
