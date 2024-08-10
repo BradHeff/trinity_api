@@ -347,20 +347,20 @@
   },
   "Programs": {
     "ADTools": {
-      "version": "2.1.0",
-      "download_url": "https://github.com/HorizonSA/ADTools/releases/"
+      "version": "2.0.10.6",
+      "download_url": "https://github.com/HorizonSA/ADTools/releases/TrinityCloud%20AD%20User%20Tool-2.0.10.6.zip"
     },
     "CanvasTools": {
-      "version": "2.1.0",
-      "download_url": "https://github.com/HorizonSA/ADTools/releases/"
+      "version": "2.0.3.4",
+      "download_url": "https://github.com/HorizonSA/ADTools/releases/Horizon%20Canvas%20User%20importer-2.0.3.4.zip"
     },
     "ResetTools": {
-      "version": "2.1.0",
-      "download_url": "https://github.com/HorizonSA/ADTools/releases/"
+      "version": "1.0.3.1",
+      "download_url": "https://github.com/HorizonSA/ADTools/releases/Horizon%20User%20Password%20Reset-1.0.3.1.zip"
     },
     "SyncTools": {
-      "version": "2.1.0",
-      "download_url": "https://github.com/HorizonSA/ADTools/releases/"
+      "version": "1.0.0.3",
+      "download_url": "https://github.com/HorizonSA/ADTools/releases/Horizon%20Canvas%20Syncer%20Tool-1.0.0.3.zip"
     }
   }
 }
