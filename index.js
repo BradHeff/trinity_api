@@ -2,21 +2,33 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const data = require("./syncer.json");
 const fs = require("fs");
 const path = require("path");
+const YAML = require("yamljs");
+const swaggerUi = require("swagger-ui-express");
 
 const apiPort = 5000;
-const api = "http://api.trincloud.cc";
+var url = "";
 const base = "/v1";
 
-// app.use(express.json());
-app.use(bodyParser.json());
-app.use(cors());
-// REST API to get all products details at once
-// With this api the frontend will only get the data
-// The frontend cannot modify or update the data
-// Because we are only using the GET method here.
+if (process.env.NODE_ENV === "production") {
+  url = "http://api.trincloud.cc";
+} else {
+  url = "localhost";
+}
+// app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
+// Serve the root HTML page
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html")); // Adjust path to your HTML file
+});
+
+// Serve syncer.json
+app.get("/data/example", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "openai.json")); // Adjust path as needed
+});
 
 app.get(`${base}/data`, (req, res) => {
   res.json(data);
@@ -39,7 +51,7 @@ app.post(`${base}/update`, (req, res) => {
   jsonData = { ...data, ...datas };
   console.log("Updated data:", jsonData);
   fs.writeFile(
-    path.join(__dirname, "syncer.json"),
+    path.join(__dirname, "public", "syncer.json"),
     JSON.stringify(jsonData, null, 2),
     (err) => {
       if (err) {
@@ -54,6 +66,7 @@ app.post(`${base}/update`, (req, res) => {
   );
 });
 
+// Start the server
 app.listen(apiPort, () => {
-  console.log("Server started on port %d (http://api.trincloud.cc)", apiPort);
+  console.log(`Server running at http://localhost:${apiPort}/`);
 });

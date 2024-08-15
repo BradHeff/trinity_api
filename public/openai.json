@@ -1,0 +1,324 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Trinity Cloud - API 3.0",
+    "description": "Welcome to Trinity Cloud's API Documentation\n\nThis API is designed to empower Horizon Christian School with seamless access to the custom tools developed by Trinity Cloud. Our API offers a robust and secure interface, enabling efficient integration with your existing systems. Through this OpenAPI Swagger documentation, you'll find comprehensive details on how to utilize our API, including endpoints, request parameters, and response formats. Whether you're managing IT resources, automating tasks, or enhancing your school's digital infrastructure, our API is built to support your needs with reliability and ease. Explore the capabilities and start integrating today!",
+    "contact": {
+      "email": "tickets@trinitycloud.com.au"
+    },
+    "license": {
+      "name": "Apache 2.0 License",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "servers": [
+    {
+      "url": "https://api.trincloud.cc/v1/data"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Get data",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataResponse"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable - The requested format is not supported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Syncer": {
+      "get": {
+        "tags": ["syncer"],
+        "summary": "Get syncer data",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncerResponse"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable - The requested format is not supported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update": {
+      "post": {
+        "tags": ["syncer"],
+        "summary": "Create a new syncer entry",
+        "operationId": "addSyncer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Syncer"
+              },
+              "example": {
+                "enabled": true,
+                "newterm": "20.04"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful creation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncerResponse"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable - The requested format is not supported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type - The server does not support the media type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/LDAP": {
+      "get": {
+        "tags": ["ldap"],
+        "summary": "Get LDAP data",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LDAPResponse"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable - The requested format is not supported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Syncer": {
+        "type": "object",
+        "required": ["enabled", "newterm"],
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Enable or disable the sync tool"
+          },
+          "newterm": {
+            "type": "string",
+            "description": "Enter the new term ID",
+            "maxLength": 10,
+            "pattern": "^\\d{2}\\.\\d{2}$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataResponse": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "SyncerResponse": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "newterm": {
+            "type": "string",
+            "pattern": "^\\d{2}\\.\\d{2}$",
+            "maxLength": 10
+          }
+        },
+        "additionalProperties": false
+      },
+      "LDAPResponse": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 255
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
