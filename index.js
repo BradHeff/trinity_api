@@ -6,16 +6,16 @@ const fs = require("fs");
 const path = require("path");
 const YAML = require("yamljs");
 const swaggerUi = require("swagger-ui-express");
-
+const data = require(path.join(__dirname, "public", "syncer.json"));
 const apiPort = 5000;
-var url = "";
+
 const base = "/v1";
 
-if (process.env.NODE_ENV === "production") {
-  url = "http://api.trincloud.cc";
-} else {
-  url = "localhost";
-}
+// if (process.env.NODE_ENV === "production") {
+//   url = "http://api.trincloud.cc";
+// } else {
+//   url = "localhost";
+// }
 // app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -44,7 +44,7 @@ app.get(`${base}/data/:section`, (req, res) => {
   }
 });
 
-app.post(`${base}/update`, (req, res) => {
+app.post(`${base}/data/update`, (req, res) => {
   const datas = req.body;
   console.log("Received data:", datas);
 
